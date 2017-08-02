@@ -1,6 +1,7 @@
 # tiles_tf
 The project prepares tiles for being processed with TensorFlow
 
+![](https://i2.wp.com/cdn-images-1.medium.com/max/600/1*wUZiI2Mg2cncuMWWXIiBgQ.png?zoom=1.5&w=697&ssl=1)
 
 There are raster tiles, created with [QTiles Plugin](https://github.com/nextgis/QTiles).
 They have to be stored appropriately to [TensorFlow Documentation](http://tflearn.org/data_utils/#image-preloader) for being processed.
