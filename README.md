@@ -12,18 +12,18 @@ TensorFlow neural network for processing Raster Tiles.
 
 ## Usage
 
-1. [data_prep.py]() is the code for preparing data to be categorized by expert(s). Edit the code in line 30
+1. [data_prep.py](https://github.com/EnviroGIS/tiles_tf/blob/master/data_prep.py) is the code for preparing data to be categorized by expert(s). Edit the code in line 30
 
 > dir_folder = 'temp_19/19/' # folder for tiles created with QTiles
 
 replacing by your tiles folder.
 Use `python data_prep.py` for running the code.
 
-2. There are 3 datasets created: `tr_data` for training data, `val_data` for validation data and `data` for testing the neural network (actually there is that sort of data that has to be processed). Now you have to cut categorized images from `tr_data` and `val_data` to the folder `1` inside. Run [data_prep2.py]() after this.
+2. There are 3 datasets created: `tr_data` for training data, `val_data` for validation data and `data` for testing the neural network (actually there is that sort of data that has to be processed). Now you have to cut categorized images from `tr_data` and `val_data` to the folder `1` inside. Run [data_prep2.py](https://github.com/EnviroGIS/tiles_tf/blob/master/data_prep2.py) after this.
 
 After running the code you will get the metafiles required in [TensorFlow Documentation](http://tflearn.org/data_utils/#image-preloader).
 
-3. Run `python3 learn.py` for training the neural network. You will be asked for the name of your neural network. There are `50` iterations by default. It could be changed in code in line 91. It is recommended to have at least 3o iteractions. _has to be verified_. Change `batch_size` in line 91 to the number your images number could be divided (_recommended near 3% of the total number_). 
+3. Run `python3 learn.py` for training the neural network. You will be asked for the name of your neural network. There are `50` iterations by default. It could be changed in code in line 91. It is recommended to have at least 3o iteractions. _Has to be verified_. Change `batch_size` in line 91 to the number your images number could be divided (_recommended near 3% of the total number_). 
 
 #### TAKES TIME TO PROCEED. You will see the accuracy of the neural network during the process. Once the neural network is ready you can use it with any similar dataset, so it is preferable to spend time and efforts to make the model as good, nice and shiny as it is possible.
 
@@ -64,6 +64,3 @@ Trained category = 0
 
 Checked category = 1 (first 9 images. All the images categorized as 1 were categorized correctly (not the same with category 0. There are some tiles with buildings). General accuracy up to 93% (After 5 iteraction it was 87%))
 ![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/check%3D1.png)
-
-Model named `build_30` is already created. You could check it with your data.
-
