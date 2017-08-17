@@ -18,8 +18,8 @@ from tflearn.data_augmentation import ImageAugmentation
 print ('TensorFlow imported')
 
 #define metafiles
-dataset_file = 'my_dataset.txt'
-validation_file = 'validation.txt'
+dataset_file = 'tr_dataset.txt'
+validation_file = 'val_dataset.txt'
 
 # Load the data set
 from tflearn.data_utils import image_preloader
@@ -95,4 +95,4 @@ model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
 
 # Save model when training is complete to a file
 model.save('model/'+name+'/'+name+'.tfl')
-print("Network trained and saved as build.tfl!")
+print('Network trained and saved as '+name+'.tfl!')

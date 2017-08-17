@@ -27,7 +27,7 @@ def file_mover(dir_folder, folder, training_num):
 			print "File", image, "copied to the 'data' directory"
 			count = count + 1
 
-dir_folder = 'temp_19/19/' # folder for tiles created with QTiles
+dir_folder = 'tiles/' # folder for tiles created with QGIS Script
 cnt = 0
 count = 0
 

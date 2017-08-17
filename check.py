@@ -39,8 +39,10 @@ network = regression(network, optimizer='adam',
 
 print ('Loading the options. This may take a while...')
 
-model = tflearn.DNN(network, tensorboard_verbose=0, checkpoint_path='model/build_30/build.tfl.ckpt')
-model.load("model/build_30/build.tfl")
+name = raw_input('Enter the model name: ')
+
+model = tflearn.DNN(network, tensorboard_verbose=0, checkpoint_path='model/'+name+'/'+name+'.tfl.ckpt')
+model.load('model/'+name+'/'+name+'.tfl')
 
 print ('Model is loaded. Checking the data...')
 
