@@ -39,7 +39,7 @@ network = regression(network, optimizer='adam',
 
 print ('Loading the options. This may take a while...')
 
-name = raw_input('Enter the model name: ')
+name = input('Enter the model name: ')
 
 model = tflearn.DNN(network, tensorboard_verbose=0, checkpoint_path='model/'+name+'/'+name+'.tfl.ckpt')
 model.load('model/'+name+'/'+name+'.tfl')
@@ -49,7 +49,9 @@ print ('Model is loaded. Checking the data...')
 os.makedirs('0')
 os.makedirs('1')
 
-for image in os.listdir('data'):
+res_dataset = open('res_dataset.txt','w')
+
+for image in os.listdir('tiles/raw'):
 	# Load the image file
 	img = scipy.ndimage.imread('data/'+image, mode="RGBA")
 
@@ -61,11 +63,13 @@ for image in os.listdir('data'):
 	# print (prediction)
 
 	# Check the result.
-	is_red = np.argmax(prediction[0]) == 1
+	is_bld = np.argmax(prediction[0]) == 1
 
-	if is_red:
+	if is_bld:
 	    print(image, "There is a building!")
+	    res_dataset.write(image + ',1\n')
 	    shutil.copy2('data/' + image, "1/" + image)
 	else:
 	    print(image, "There is not a building!")
+	    res_dataset.write(image + ',0\n')
 	    shutil.copy2('data/' + image, "0/" + image)

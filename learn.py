@@ -81,7 +81,7 @@ network = regression(network, optimizer='adam',
                      loss='categorical_crossentropy',
                      learning_rate=0.001)
 
-name = raw_input('Enter the model name: ')
+name = input('Enter the model name: ')
 # Wrap the network in a model object
 print ('Wrapping the network')
 model = tflearn.DNN(network, tensorboard_verbose=0, checkpoint_path='model/'+name+'/'+name+'.tfl.ckpt')
@@ -89,10 +89,11 @@ model = tflearn.DNN(network, tensorboard_verbose=0, checkpoint_path='model/'+nam
 # Train it! We'll do 100 training passes and monitor it as it goes.
 print ('\n\nWe are ready to train the network')
 model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
-          show_metric=True, batch_size=40,
+          show_metric=True, batch_size=30,
           snapshot_epoch=True,
           run_id=name)
 
+os.makedirs('model/' + name)
 # Save model when training is complete to a file
 model.save('model/'+name+'/'+name+'.tfl')
 print('Network trained and saved as '+name+'.tfl!')
