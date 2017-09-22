@@ -15,6 +15,8 @@ from tflearn.layers.estimator import regression
 from tflearn.data_preprocessing import ImagePreprocessing
 from tflearn.data_augmentation import ImageAugmentation
 
+import os
+
 print ('TensorFlow imported')
 
 #define metafiles
@@ -46,21 +48,21 @@ img_aug.add_random_blur(sigma_max=3.)
 # Define our network architecture:
 print ('Defining network architecture')
 # Input is a 64x64 image with 4 channels (RGBA)
-network = input_data(shape=[None, 64, 64, 4],
+network = input_data(shape=[None, 64, 64, 3],
                      data_preprocessing=img_prep,
                      data_augmentation=img_aug)
 
 # Step 1: Convolution
-network = conv_2d(network, 64, 4, activation='relu')
+network = conv_2d(network, 64, 3, activation='relu')
 print ('Step 1. Convolution 1 Done')
 # Step 2: Max pooling
 network = max_pool_2d(network, 2)
 print ('Step 2. Max Pooling is Done 1')
 # Step 3: Convolution again
-network = conv_2d(network, 128, 4, activation='relu')
+network = conv_2d(network, 128, 3, activation='relu')
 print ('Step 3. Convolution 2 is Done')
 # Step 4: Convolution yet again
-network = conv_2d(network, 128, 4, activation='relu')
+network = conv_2d(network, 128, 3, activation='relu')
 print ('Step 4. Convolution 3 is Done')
 # Step 5: Max pooling again
 network = max_pool_2d(network, 2)
@@ -93,7 +95,7 @@ model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
           snapshot_epoch=True,
           run_id=name)
 
-os.makedirs('model/' + name)
+os.makedirs('model/' + name + '_main')
 # Save model when training is complete to a file
-model.save('model/'+name+'/'+name+'.tfl')
+model.save('model/'+name + '_main/'+name+'.tfl')
 print('Network trained and saved as '+name+'.tfl!')

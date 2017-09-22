@@ -12,35 +12,29 @@ TensorFlow neural network for processing Raster Tiles.
 
 ## Usage
 
-1. [data_prep.py](https://github.com/EnviroGIS/tiles_tf/blob/master/data_prep.py) is the code for preparing data to be categorized by expert(s). Edit the code in line 30
+1. QGIS. The [code](https://github.com/EnviroGIS/tiles_tf/tree/master/qgis_scripts/raster_clipper.py) provided proposes you to create a vector grid any size you like. You may also use you own vector layer. This code HAS TO BE EXTREMELY UPGRADED. After creating the grid (or upload your own vector layer) you have to categorize vectors giving objects appropriate attributes. Then, the raster will be clipped with this vector. 
 
-> dir_folder = 'temp_19/19/' # folder for tiles created with QTiles
+2. There are 3 datasets created: `tr` for training data, `val` for validation data and `raw` for testing the neural network (actually there is that sort of data that has to be processed).
 
-replacing by your tiles folder.
-Use `python data_prep.py` for running the code.
+There are also metafiles created (required in [TensorFlow Documentation](http://tflearn.org/data_utils/#image-preloader)).
 
-2. There are 3 datasets created: `tr_data` for training data, `val_data` for validation data and `data` for testing the neural network (actually there is that sort of data that has to be processed). Now you have to cut categorized images from `tr_data` and `val_data` to the folder `1` inside. Run [data_prep2.py](https://github.com/EnviroGIS/tiles_tf/blob/master/data_prep2.py) after this.
-
-After running the code you will get the metafiles required in [TensorFlow Documentation](http://tflearn.org/data_utils/#image-preloader).
-
-3. Run `python3 learn.py` for training the neural network. You will be asked for the name of your neural network. There are `50` iterations by default. It could be changed in code in line 91. It is recommended to have at least 3o iteractions. _Has to be verified_. Change `batch_size` in line 91 to the number your images number could be divided (_recommended near 3% of the total number_). 
+3. Run `python3 learn.py` for training the neural network. You will be asked for the name of your neural network. There are `50` iterations by default. It could be changed in code in line 93. It is recommended to have at least 3o iteractions. _Has to be verified_. Change `batch_size` in line 91 to the number your images number could be divided (_recommended near 3% of the total number_). 
 
 #### TAKES TIME TO PROCEED. You will see the accuracy of the neural network during the process. Once the neural network is ready you can use it with any similar dataset, so it is preferable to spend time and efforts to make the model as good, nice and shiny as it is possible.
 
-4. Run `python3 check.py` for checking data from dataset stored in `data` folder to be categorized. Images would be copied to folders `0` and `1`.
+4. Run `python3 check.py` for checking data from dataset stored in `tiles\raw` folder to be categorized. Images would be copied to folders `0` and `1` and appropriate metafile is created.
 
-### CONGRATULATIONS! You have just tested #TilesBasedNeuralNetwork.
+5. The metafile created could be joined with the grid layer created using the key field.
 
+![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/vector.png)
 
 # Things to do
 
-1. Georeferencing data
+1. Custom categories number
 
-2. Custom categories number
+2. Read theory to make it more efficient.
 
-3. Read theory to make it more efficient.
-
-4. Visualize the neural network
+3. Visualize the neural network
 
 Some information to inspire:
 * [CNN is FUN (in Russian)](https://algotravelling.com/ru/%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%D0%BD%D0%BE%D0%B5-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%8D%D1%82%D0%BE-%D0%B2%D0%B5%D1%81%D0%B5%D0%BB%D0%BE-3/)
@@ -53,16 +47,16 @@ Some information to inspire:
 
 Idea: define tiles with artificial objects (buildings primarily).
 
-Input: zoom 19, Bing Imagery, 1120 training images, 1120 validation images, `batch_size = 40`, `n_epoch = 30`.
+Input: cellsize - 100m, Bing Imagery, 710 training images, 362 validation images, `batch_size = 30`, `n_epoch = 50`.
 
 Samples:
 Trained category = 1
-![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/train%3D1.png)
+![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/tr_1.png)
 
 Trained category = 0
-![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/train%3D0.png)
+![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/tr_0.png)
 
 ## After training and checking
 
-Checked category = 1 (first 9 images. All the images categorized as 1 were categorized correctly (not the same with category 0. There are some tiles with buildings). General accuracy up to 93% (After 5 iteraction it was 87%))
-![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/check%3D1.png)
+Checked category = 1 (All the images categorized as 1 were categorized correctly (not the same with category 0. There are some tiles with buildings). General accuracy up to 95% (After 5 iteraction it was 85%))
+![](https://github.com/EnviroGIS/tiles_tf/blob/master/img/ch_1.png)
